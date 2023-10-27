@@ -1,17 +1,16 @@
 Package: RTgetCoordinate
-Title: What the Package Does (One Line, Title Case)
+Title: Return coordinates from addres using Mappe Regione Toscana e OpenRouteService
 Version: 0.0.0.9001
 Authors@R: 
     person("Omar", "Giorgetti", , "omar.giorgetti@regione.toscana.it", role = c("aut", "cre"))
 Description: Restituisce latitudine e longitudine passando un indirizzo. 
-        Utilizza prima di tutto il servizio mappe di Regione Toscana, nel caso 
-        l'indirizzo non venisse riconosciuto utilizza il servizio openrouteservice
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+            Utilizza prima di tutto il servizio mappe di Regione Toscana, nel caso l'indirizzo 
+            non venisse riconosciuto utilizza il servizio openrouteservice
+License: use_mit_license()
 Imports:
   httr,
-  xml2,
-  openrouteservice
+  openrouteservice,
+  xml2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
