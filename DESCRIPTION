@@ -2,11 +2,16 @@ Package: RTgetCoordinate
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Omar", "Giorgetti", , "omar.giorgetti@regione.toscana.it", role = c("aut", "cre"))
+Description: Restituisce latitudine e longitudine passando un indirizzo. 
+        Utilizza prima di tutto il servizio mappe di Regione Toscana, nel caso 
+        l'indirizzo non venisse riconosciuto utilizza il servizio openrouteservice
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
+Imports:
+  httr,
+  xml2,
+  openrouteservice
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
