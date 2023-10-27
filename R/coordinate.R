@@ -28,17 +28,17 @@ getCoordRT <- function(indirizzo,civico,comune,siglaprovincia,url){
   indirizzo <- paste0(indirizzo,' ',civico)
   getstr <- paste0(url,'provincia=',provincia,'&comune=',gsub(' ','%20',comune),'&indirizzo=',gsub(' ','%20',indirizzo),posturl)
   print(getstr)
-  getstrg <- GET(getstr)
+  getstrg <- httr::GET(getstr)
   print(getstrg)
   status <- getstrg$status_code
   print(paste0('status: ',status))
   if (status!=400){
     print('OK')
     ris <- xml2::as_xml_document(getstrg)
-    nodes <- xml_find_all(ris,'.//multiRef')
+    nodes <- xml2::xml_find_all(ris,'.//multiRef')
     sezioneid2 <- nodes[xml_attr(nodes,'id')=='id2']
-    lat_rt <- as.double(xml_text(xml_find_first(sezioneid2,'.//latitudine')))
-    lon_rt <- as.double(xml_text(xml_find_first(sezioneid2,'.//longitudine')))
+    lat_rt <- as.double(xml_text(xml2::xml_find_first(sezioneid2,'.//latitudine')))
+    lon_rt <- as.double(xml_text(xml2::xml_find_first(sezioneid2,'.//longitudine')))
     if (is.na(lat_rt) || is.na(lon_rt)){
       print('NOCOORD')
       getCoordRT <- c(0,0,'NOCOORD')
@@ -74,7 +74,7 @@ getCoordRT <- function(indirizzo,civico,comune,siglaprovincia,url){
 #' @export
 getCoordORS <- function(indirizzo,civico,comune,provincia,token){
   query <- paste0(indirizzo,' ',civico,', ',comune,', ',provincia)
-  ris_ors <- ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = TOKENORS)
+  ris_ors <- openrouteservice::ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = TOKENORS)
   if (length(ris_ors$features)>0){
     point <- ris_ors$features[[1]]$geometry$coordinates
   }else{
