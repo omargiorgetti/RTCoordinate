@@ -1,7 +1,3 @@
-library(httr)
-library(xml2)
-library(openrouteservice)
-
 #' Funzione che restituisce le cordinate di un indirizzo utilizzando il servizio mappe della regione toscana
 #' @param indirizzo
 #' @param civico
@@ -36,9 +32,9 @@ getCoordRT <- function(indirizzo,civico,comune,siglaprovincia,url){
     print('OK')
     ris <- xml2::as_xml_document(getstrg)
     nodes <- xml2::xml_find_all(ris,'.//multiRef')
-    sezioneid2 <- nodes[xml_attr(nodes,'id')=='id2']
-    lat_rt <- as.double(xml_text(xml2::xml_find_first(sezioneid2,'.//latitudine')))
-    lon_rt <- as.double(xml_text(xml2::xml_find_first(sezioneid2,'.//longitudine')))
+    sezioneid2 <- nodes[xml2::xml_attr(nodes,'id')=='id2']
+    lat_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//latitudine')))
+    lon_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//longitudine')))
     if (is.na(lat_rt) || is.na(lon_rt)){
       print('NOCOORD')
       getCoordRT <- c(0,0,'NOCOORD')
