@@ -18,7 +18,7 @@
 #' - NOOKResponse se la chiamata della url ha dato errore
 #' - NOCOORD se la riposta ha dato esito positivo ma l'indirizzo non è interpretabile
 #' @export
-getCoordRT <- function(indirizzo,civico,comune,siglaprovincia,url){
+getCoordRT <- function(indirizzo,civico,comune,provincia,url){
 
   posturl <- '&fonte=1'
   indirizzo <- paste0(indirizzo,' ',civico)
