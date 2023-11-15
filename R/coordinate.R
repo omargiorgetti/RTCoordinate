@@ -28,7 +28,7 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
   print(getstrg)
   status <- getstrg$status_code
   print(paste0('status: ',status))
-  if (status!=400){
+  if (!(status==400 || status==500)){
     print('OK')
     ris <- xml2::as_xml_document(getstrg)
     nodes <- xml2::xml_find_all(ris,'.//multiRef')
@@ -36,8 +36,8 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
     lat_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//latitudine')))
     lon_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//longitudine')))
     if (is.na(lat_rt) || is.na(lon_rt)){
-      print('NOCOORD')
-      getCoordRT <- c(0,0,'NOCOORD')
+      print('NOCOORDRT')
+      getCoordRT <- c(0,0,'NOCOORDRT')
     }
     else{
       getCoordRT <- c(lon_rt,lat_rt,getstr)
@@ -45,8 +45,8 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
 
   }else
   {
-    print('NOOKResponse')
-    getCoordRT <- c(0,0,'NOOKResponse')}
+    print('NOOKRTResponse')
+    getCoordRT <- c(0,0,'NOOKRTResponse')}
 
 }
 
@@ -74,9 +74,9 @@ getCoordORS <- function(indirizzo,civico,comune,provincia,token){
   if (length(ris_ors$features)>0){
     point <- ris_ors$features[[1]]$geometry$coordinates
   }else{
-    point <- NA
+    point <- c(0,0,'NOCOORDORS')
   }
-  getCoordORS <- point
+  getCoordORS <- c(point,query)
 
 }
 
