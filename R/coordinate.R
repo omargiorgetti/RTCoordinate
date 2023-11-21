@@ -104,7 +104,7 @@ getCoordORS <- function(indirizzo,civico,comune,provincia,token){
 
 getCoordinate<-function(indirizzo,civico,comune,provincia,siglaprovincia,url,token){
   RTcoord=getCoordRT(indirizzo,civico,comune,siglaprovincia,url)
-  if (RTcoord[3]=="NOCOORD" || RTcoord[3]=="NOOKResponse"){
+  if (RTcoord[3]=="NOCOORDRT" || RTcoord[3]=="NOOKRTResponse"){
     getCoordinate <- getCoordORS(indirizzo,civico,comune,provincia,token)
   }
   else{
