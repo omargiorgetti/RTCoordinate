@@ -35,7 +35,7 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
     sezioneid2 <- nodes[xml2::xml_attr(nodes,'id')=='id2']
     lat_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//latitudine')))
     lon_rt <- as.double(xml2::xml_text(xml2::xml_find_first(sezioneid2,'.//longitudine')))
-    if (is.na(lat_rt) || is.na(lon_rt)||lenght(lat_rt==0)==0||length(lon_rt==0)==0){
+    if (is.na(lat_rt) || is.na(lon_rt)||length(lat_rt==0)==0||length(lon_rt==0)==0){
       print('NOCOORDRT')
       getCoordRT <- c(0,0,'NOCOORDRT')
     }
