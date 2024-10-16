@@ -8,7 +8,8 @@ getCoordORS(indirizzo, civico, comune, provincia, token)
 }
 \value{
 vettore con longitudie e latitudine
-NA se l'indirizzo non viene decodificato
+NOCOORDORS se l'indirizzo non viene decodificato
+Messagge in caso di errore o warning
 }
 \description{
 Funzione che restituisce le cordinate di un indirizzo utilizzando il servizio openruoteservice

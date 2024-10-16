@@ -4,7 +4,7 @@
 \alias{getCoordRT}
 \title{Funzione che restituisce le cordinate di un indirizzo utilizzando il servizio mappe della regione toscana}
 \usage{
-getCoordRT(indirizzo, civico, comune, siglaprovincia, url)
+getCoordRT(indirizzo, civico, comune, provincia, url)
 }
 \value{
 vettore con longitudie e latitudine e una stringa che contiene:

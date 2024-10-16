@@ -66,18 +66,27 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
 #' coordORS <- getCoordORS(indirizzo,civico,comune,provincia,token)
 #'
 #' @return vettore con longitudie e latitudine
-#' NA se l'indirizzo non viene decodificato
+#' NOCOORDORS se l'indirizzo non viene decodificato
+#' Messagge in caso di errore o warning
 #' @export
 getCoordORS <- function(indirizzo,civico,comune,provincia,token){
   query <- paste0(indirizzo,' ',civico,', ',comune,', ',provincia)
-  ris_ors <- openrouteservice::ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = token)
-  if (length(ris_ors$features)>0){
-    point <- ris_ors$features[[1]]$geometry$coordinates
-  }else{
-    point <- c(0,0,'NOCOORDORS')
-  }
+  point <- tryCatch({
+    ris_ors <- ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = TOKENORS)
+    if (length(ris_ors$features)>0){
+      point <- ris_ors$features[[1]]$geometry$coordinates
+    }else{
+      point <- c(0,0,'NOCOORDORS')
+    }
+  },
+  error=function(err){
+    point <- c(0,0,err$message)
+    return(point)
+  }, warning=function(war){
+    point <- c(0,0,war$message)
+    return(point)
+  })
   getCoordORS <- c(point,query)
-
 }
 
 #' Funzione che restituisce le cordinate di un indirizzo utilizzando il servizio mappe di regione toscana nel caso di non riuscita utilizza OpenRuoteService
