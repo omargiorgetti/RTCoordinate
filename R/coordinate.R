@@ -72,7 +72,7 @@ getCoordRT <- function(indirizzo,civico,comune,provincia,url){
 getCoordORS <- function(indirizzo,civico,comune,provincia,token){
   query <- paste0(indirizzo,' ',civico,', ',comune,', ',provincia)
   point <- tryCatch({
-    ris_ors <- ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = TOKENORS)
+    ris_ors <- openrouteservice::ors_geocode(query = query,size=1,source='osm',boundary.country='IT',api_key = TOKENORS)
     if (length(ris_ors$features)>0){
       point <- ris_ors$features[[1]]$geometry$coordinates
     }else{
